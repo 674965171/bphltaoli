@@ -200,7 +200,7 @@ class DisplayManager:
                             total_slippage = long_slippage + short_slippage
                             self.logger.debug(f"{symbol}的总滑点计算: {long_slippage} + {short_slippage} = {total_slippage}")
                 
-                # 获取持仓信息（如果存在）
+                # 获取持仓方向信息（如果存在）
                 bp_position_side = symbol_data.get("bp_position_side", None)
                 hl_position_side = symbol_data.get("hl_position_side", None)
                 

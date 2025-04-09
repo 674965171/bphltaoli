@@ -5,13 +5,13 @@
 # 用于连接Backpack和Hyperliquid交易所的API密钥
 exchanges:
   backpack:
-    api_key: "-------------------------------"   # Backpack交易所的API密钥
-    api_secret: "-------------------------------"  # Backpack交易所的API密钥对应的密钥
+    api_key: "A--------------"   # Backpack交易所的API密钥
+    api_secret: "h--------------"  # Backpack交易所的API密钥对应的密钥
   hyperliquid:
     # 注意：Hyperliquid使用以太坊钱包地址和私钥进行认证
-    api_key: "-------------------------------"  # 以太坊钱包地址(API钱包)，用于签名认证
-    api_secret: "-------------------------------"  # api私钥
-    public_address: "-------------------------------"  # 公共ETH钱包地址，就是你的evm钱包地址，用于查询账户信息和持仓
+    api_key: "--------------"  # 以太坊钱包地址(API钱包)，用于签名认证
+    api_secret: "--------------"  # 以太坊钱包私钥
+    public_address: "--------------"  # 公共ETH钱包地址，用于查询账户信息和持仓
 
 # 套利策略配置
 # 控制套利策略的运行方式、触发条件和交易参数
@@ -33,7 +33,7 @@ strategy:
     condition_type: "all"  # 默认使用资金费率条件
     
     # 资金费率差异条件参数
-    min_funding_diff: 0.0008  # 最小资金费率差阈值，只有当两个交易所的资金费率差大于此值时才会触发开仓////////
+    min_funding_diff: 0.08  # 最小资金费率差阈值，只有当两个交易所的资金费率差大于此值时才会触发开仓////////
     
     # 价格差异条件参数 (对于价格套利)
     min_price_diff_percent: 0.08 # 最小价格差阈值（百分比），当两个交易所价格差异大于此值时，可以触发开仓///////
@@ -51,9 +51,9 @@ strategy:
   # 平仓条件配置------------------------------------------------------------------------------
   close_conditions:
     # 可选值与open_conditions相同
-    condition_type: "any"  # 默认满足任一条件即可平仓
+    condition_type: "all"  # 默认满足任一条件即可平仓
     
-    # 资金费率差异条件参数
+    # 资金费率差异符号变化条件
     funding_diff_sign_change: true  # 当资金费率差值符号与开仓时相反时平仓
     min_funding_diff: 0.08  # 当资金费率差值小于此阈值时平仓（无套利空间）///////
     
@@ -64,6 +64,7 @@ strategy:
     
     # 时间条件参数
     max_position_time: 2880000  # 最长持仓时间(秒)，持仓超过此时间自动平仓，默认8小时
+    min_position_time: 600  # 最小持仓时间(秒)，持仓时间少于此值不会平仓，防止刚开仓就平仓
     
     # 方向一致性检查参数
     check_direction_consistency: false  # 是否检查价格差异和资金费率差异的方向一致性
@@ -78,7 +79,7 @@ strategy:
     BTC: 0.001  # BTC开仓数量为0.001个BTC
     ETH: 0.01   # ETH开仓数量为0.01个ETH
     SOL: 0.1    # SOL开仓数量为0.1个SOL
-    AVAX: 0.1  # 添加新币种的开仓数量
+    AVAX: 2  # 添加新币种的开仓数量
     AAVE: 0.4  # AAVE开仓数量
     ADA: 80.0  # ADA开仓数量
     ARB: 160.0  # ARB开仓数量
@@ -100,6 +101,7 @@ strategy:
     TRUMP: 6.0  # TRUMP开仓数量
     WIF: 130.0  # WIF开仓数量
     XRP: 25.0  # XRP开仓数量
+
   max_total_position_usd: 150  # 所有币种的总开仓金额上限（美元），暂未使用
   check_interval: 5  # 检查套利机会的时间间隔（秒），每隔这么多秒检查一次是否有套利机会
   funding_update_interval: 60  # 更新资金费率的时间间隔（秒），每隔这么多秒从交易所获取一次最新的资金费率
@@ -176,10 +178,10 @@ trading_pairs:
     tick_size: 0.01
 
   - symbol: "AVAX"
-    min_volume: 0.1
+    min_volume: 2
     price_precision: 3
     size_precision: 2
-    max_position_size: 0.1
+    max_position_size: 2
     tick_size: 0.001
 
   - symbol: "AAVE"
